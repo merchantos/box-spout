@@ -133,7 +133,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->hasFoundSheet;
     }
@@ -144,7 +144,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         $this->hasFoundSheet = $this->xmlReader->readUntilNodeFound(self::XML_NODE_TABLE);
 
@@ -159,6 +159,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return \Box\Spout\Reader\ODS\Sheet
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $escapedSheetName = $this->xmlReader->getAttribute(self::XML_ATTRIBUTE_TABLE_NAME);
@@ -216,6 +217,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->currentSheetIndex + 1;
