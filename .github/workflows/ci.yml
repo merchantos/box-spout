@@ -8,24 +8,24 @@ jobs:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.operating-system }}
-    name: Tests - PHP 8.1 on ${{ matrix.operating-system }}
+    name: Tests - PHP 8.4 on ${{ matrix.operating-system }}
     env:
       extensions: zip, xmlreader, dom
       cache-key: cache-matrix-v1 # can be any string, change to clear the extension cache.
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
           key: ${{ env.cache-key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -34,15 +34,16 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
@@ -59,7 +60,7 @@ jobs:
   tests-on-older-php:
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4', '8.0']
+        php-versions: ['8.3']
     runs-on: ubuntu-latest
     name: Tests - PHP ${{ matrix.php-versions }}
     env:
@@ -67,7 +68,7 @@ jobs:
       cache-key: cache-matrix-v1 # can be any string, change to clear the extension cache.
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup cache environment
         id: extcache
@@ -78,7 +79,7 @@ jobs:
           key: ${{ env.cache-key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -92,10 +93,11 @@ jobs:
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
@@ -117,18 +119,18 @@ jobs:
       cache-key: cache-single-v1 # can be any string, change to clear the extension cache.
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
           key: ${{ env.cache-key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -137,15 +139,16 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
@@ -176,18 +179,18 @@ jobs:
       cache-key: cache-single-v1 # can be any string, change to clear the extension cache.
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
           key: ${{ env.cache-key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -196,15 +199,16 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
@@ -226,18 +230,18 @@ jobs:
       cache-key: cache-single-v1 # can be any string, change to clear the extension cache.
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
           key: ${{ env.cache-key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -246,16 +250,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           extensions: ${{ env.extensions }}
           tools: phpstan
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
