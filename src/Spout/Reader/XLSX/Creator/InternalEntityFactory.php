@@ -72,7 +72,7 @@ class InternalEntityFactory implements InternalEntityFactoryInterface
         $isSheetActive,
         $isSheetVisible,
         $optionsManager,
-        $sharedStringsManager
+        $sharedStringsManager,
     ) {
         $rowIterator = $this->createRowIterator($filePath, $sheetDataXMLFilePath, $optionsManager, $sharedStringsManager);
 

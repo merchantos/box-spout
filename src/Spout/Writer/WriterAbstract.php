@@ -50,7 +50,7 @@ abstract class WriterAbstract implements WriterInterface
     public function __construct(
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
-        HelperFactory $helperFactory
+        HelperFactory $helperFactory,
     ) {
         $this->optionsManager = $optionsManager;
         $this->globalFunctionsHelper = $globalFunctionsHelper;
@@ -259,7 +259,7 @@ abstract class WriterAbstract implements WriterInterface
         $this->close();
 
         // remove output file if it was created
-        if ($this->globalFunctionsHelper->file_exists($this->outputFilePath)) {
+        if ($this->outputFilePath !== null && $this->globalFunctionsHelper->file_exists($this->outputFilePath)) {
             $outputFolderPath = \dirname($this->outputFilePath);
             $fileSystemHelper = $this->helperFactory->createFileSystemHelper($outputFolderPath);
             $fileSystemHelper->deleteFile($this->outputFilePath);

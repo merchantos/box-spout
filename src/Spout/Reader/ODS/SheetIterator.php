@@ -76,10 +76,10 @@ class SheetIterator implements IteratorInterface
      * Rewind the Iterator to the first element
      * @see http://php.net/manual/en/iterator.rewind.php
      *
-     * @throws \Box\Spout\Common\Exception\IOException If unable to open the XML file containing sheets' data
+     * @throws IOException If unable to open the XML file containing sheets' data
      * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->xmlReader->close();
 
@@ -133,7 +133,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         return $this->hasFoundSheet;
     }
@@ -144,7 +144,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function next()
+    public function next() : void
     {
         $this->hasFoundSheet = $this->xmlReader->readUntilNodeFound(self::XML_NODE_TABLE);
 
@@ -157,8 +157,9 @@ class SheetIterator implements IteratorInterface
      * Return the current element
      * @see http://php.net/manual/en/iterator.current.php
      *
-     * @return \Box\Spout\Reader\ODS\Sheet
+     * @return Sheet
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $escapedSheetName = $this->xmlReader->getAttribute(self::XML_ATTRIBUTE_TABLE_NAME);
@@ -192,8 +193,8 @@ class SheetIterator implements IteratorInterface
         // The given sheet is active if its name matches the defined active sheet's name
         // or if no information about the active sheet was found, it defaults to the first sheet.
         return (
-            ($activeSheetName === null && $sheetIndex === 0) ||
-            ($activeSheetName === $sheetName)
+            ($activeSheetName === null && $sheetIndex === 0)
+            || ($activeSheetName === $sheetName)
         );
     }
 
@@ -216,6 +217,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->currentSheetIndex + 1;

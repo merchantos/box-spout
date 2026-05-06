@@ -14,6 +14,9 @@ class SpoutTestStream
     public const PATH_TO_CSV_RESOURCES = 'tests/resources/csv/';
     public const CSV_EXTENSION = '.csv';
 
+    /** @var resource|null Populated by PHP when the stream wrapper is registered with a context */
+    public $context;
+
     /** @var int */
     private $position;
 

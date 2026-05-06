@@ -22,14 +22,14 @@ class XMLProcessor
     public const PROCESSING_CONTINUE = 1;
     public const PROCESSING_STOP = 2;
 
-    /** @var \Box\Spout\Reader\Wrapper\XMLReader The XMLReader object that will help read sheet's XML data */
+    /** @var XMLReader The XMLReader object that will help read sheet's XML data */
     protected $xmlReader;
 
     /** @var array Registered callbacks */
     private $callbacks = [];
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object
+     * @param XMLReader $xmlReader XMLReader object
      */
     public function __construct($xmlReader)
     {

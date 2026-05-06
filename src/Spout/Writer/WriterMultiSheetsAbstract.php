@@ -37,7 +37,7 @@ abstract class WriterMultiSheetsAbstract extends WriterAbstract
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
         HelperFactory $helperFactory,
-        ManagerFactoryInterface $managerFactory
+        ManagerFactoryInterface $managerFactory,
     ) {
         parent::__construct($optionsManager, $globalFunctionsHelper, $helperFactory);
         $this->managerFactory = $managerFactory;

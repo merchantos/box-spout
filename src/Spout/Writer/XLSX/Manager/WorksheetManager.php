@@ -77,7 +77,7 @@ EOD;
         StyleMerger $styleMerger,
         SharedStringsManager $sharedStringsManager,
         XLSXEscaper $stringsEscaper,
-        StringHelper $stringHelper
+        StringHelper $stringHelper,
     ) {
         $this->shouldUseInlineStrings = $optionsManager->getOption(Options::SHOULD_USE_INLINE_STRINGS);
         $this->rowManager = $rowManager;

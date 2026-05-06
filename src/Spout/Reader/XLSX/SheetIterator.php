@@ -12,7 +12,7 @@ use Box\Spout\Reader\XLSX\Manager\SheetManager;
  */
 class SheetIterator implements IteratorInterface
 {
-    /** @var \Box\Spout\Reader\XLSX\Sheet[] The list of sheet present in the file */
+    /** @var Sheet[] The list of sheet present in the file */
     protected $sheets;
 
     /** @var int The index of the sheet being read (zero-based) */
@@ -20,7 +20,7 @@ class SheetIterator implements IteratorInterface
 
     /**
      * @param SheetManager $sheetManager Manages sheets
-     * @throws \Box\Spout\Reader\Exception\NoSheetsFoundException If there are no sheets in the file
+     * @throws NoSheetsFoundException If there are no sheets in the file
      */
     public function __construct($sheetManager)
     {
@@ -38,7 +38,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->currentSheetIndex = 0;
     }
@@ -49,7 +49,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         return ($this->currentSheetIndex < \count($this->sheets));
     }
@@ -60,7 +60,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function next()
+    public function next() : void
     {
         // Using isset here because it is way faster than array_key_exists...
         if (isset($this->sheets[$this->currentSheetIndex])) {
@@ -75,8 +75,9 @@ class SheetIterator implements IteratorInterface
      * Return the current element
      * @see http://php.net/manual/en/iterator.current.php
      *
-     * @return \Box\Spout\Reader\XLSX\Sheet
+     * @return Sheet
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->sheets[$this->currentSheetIndex];
@@ -88,6 +89,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->currentSheetIndex + 1;

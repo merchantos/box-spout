@@ -42,7 +42,7 @@ class SheetManager
     /** @var \Box\Spout\Common\Manager\OptionsManagerInterface Reader's options manager */
     protected $optionsManager;
 
-    /** @var \Box\Spout\Reader\XLSX\Manager\SharedStringsManager Manages shared strings */
+    /** @var SharedStringsManager Manages shared strings */
     protected $sharedStringsManager;
 
     /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper Helper to work with global functions */
@@ -66,7 +66,7 @@ class SheetManager
     /**
      * @param string $filePath Path of the XLSX file being read
      * @param \Box\Spout\Common\Manager\OptionsManagerInterface $optionsManager Reader's options manager
-     * @param \Box\Spout\Reader\XLSX\Manager\SharedStringsManager $sharedStringsManager Manages shared strings
+     * @param SharedStringsManager $sharedStringsManager Manages shared strings
      * @param \Box\Spout\Common\Helper\Escaper\XLSX $escaper Used to unescape XML data
      * @param InternalEntityFactory $entityFactory Factory to create entities
      * @param mixed $sharedStringsManager
@@ -164,7 +164,7 @@ class SheetManager
      * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReaderOnSheetNode XML Reader instance, pointing on the node describing the sheet, as defined in "workbook.xml"
      * @param int $sheetIndexZeroBased Index of the sheet, based on order of appearance in the workbook (zero-based)
      * @param bool $isSheetActive Whether this sheet was defined as active
-     * @return \Box\Spout\Reader\XLSX\Sheet Sheet instance
+     * @return Sheet Sheet instance
      */
     protected function getSheetFromSheetXMLNode($xmlReaderOnSheetNode, $sheetIndexZeroBased, $isSheetActive)
     {

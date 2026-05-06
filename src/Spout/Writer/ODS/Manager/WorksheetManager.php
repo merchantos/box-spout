@@ -21,7 +21,7 @@ use Box\Spout\Writer\ODS\Manager\Style\StyleManager;
  */
 class WorksheetManager implements WorksheetManagerInterface
 {
-    /** @var \Box\Spout\Common\Helper\Escaper\ODS Strings escaper */
+    /** @var ODSEscaper Strings escaper */
     private $stringsEscaper;
 
     /** @var StringHelper String helper */
@@ -45,7 +45,7 @@ class WorksheetManager implements WorksheetManagerInterface
         StyleManager $styleManager,
         StyleMerger $styleMerger,
         ODSEscaper $stringsEscaper,
-        StringHelper $stringHelper
+        StringHelper $stringHelper,
     ) {
         $this->styleManager = $styleManager;
         $this->styleMerger = $styleMerger;
@@ -57,7 +57,7 @@ class WorksheetManager implements WorksheetManagerInterface
      * Prepares the worksheet to accept data
      *
      * @param Worksheet $worksheet The worksheet to start
-     * @throws \Box\Spout\Common\Exception\IOException If the sheet data file cannot be opened for writing
+     * @throws IOException If the sheet data file cannot be opened for writing
      * @return void
      */
     public function startSheet(Worksheet $worksheet)

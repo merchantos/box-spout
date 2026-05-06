@@ -65,7 +65,7 @@ class ReflectionHelper
         if ($saveOriginalValue && (!isset(self::$privateVarsToReset[$class]) || !isset(self::$privateVarsToReset[$class][$valueName]))) {
             self::$privateVarsToReset[$class][$valueName] = $reflectionProperty->getValue();
         }
-        $reflectionProperty->setValue($value);
+        $reflectionProperty->setValue(null, $value);
 
         // clean up
         $reflectionProperty->setAccessible(false);

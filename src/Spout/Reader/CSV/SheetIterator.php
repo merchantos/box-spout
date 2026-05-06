@@ -63,7 +63,8 @@ class SheetIterator implements IteratorInterface
      *
      * @return Sheet
      */
-    public function current() : Sheet
+    #[\ReturnTypeWillChange]
+    public function current()
     {
         return $this->sheet;
     }
@@ -74,7 +75,8 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
-    public function key() : int
+    #[\ReturnTypeWillChange]
+    public function key()
     {
         return 1;
     }

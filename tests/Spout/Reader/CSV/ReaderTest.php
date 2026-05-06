@@ -47,7 +47,7 @@ class ReaderTest extends TestCase
     {
         $this->expectException(IOException::class);
 
-        /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
+        /** @var GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
         $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
                         ->onlyMethods(['is_readable'])
                         ->getMock();
@@ -66,7 +66,7 @@ class ReaderTest extends TestCase
     {
         $this->expectException(IOException::class);
 
-        /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
+        /** @var GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
         $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
                         ->onlyMethods(['fopen'])
                         ->getMock();
@@ -304,7 +304,7 @@ class ReaderTest extends TestCase
         $allRows = [];
         $resourcePath = $this->getResourcePath($fileName);
 
-        /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
+        /** @var GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
         $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
                         ->onlyMethods(['function_exists'])
                         ->getMock();
@@ -315,7 +315,7 @@ class ReaderTest extends TestCase
         ];
         $helperStub->method('function_exists')->will($this->returnValueMap($returnValueMap));
 
-        /** @var \Box\Spout\Reader\CSV\Reader $reader */
+        /** @var Reader $reader */
         $reader = $this->createCSVReader(null, $helperStub);
         $reader
             ->setEncoding($fileEncoding)
@@ -442,7 +442,7 @@ class ReaderTest extends TestCase
         // register stream wrapper
         stream_wrapper_register('spout', SpoutTestStream::CLASS_NAME);
 
-        /** @var \Box\Spout\Reader\CSV\Reader $reader */
+        /** @var Reader $reader */
         $reader = $this->createCSVReader();
         $reader->open($resourcePath);
 
@@ -472,13 +472,13 @@ class ReaderTest extends TestCase
     {
         $this->expectException(IOException::class);
 
-        /** @var \Box\Spout\Reader\CSV\Reader $reader */
+        /** @var Reader $reader */
         $reader = $this->createCSVReader();
         $reader->open('unsupported://foobar');
     }
 
     /**
-     * @param \Box\Spout\Common\Helper\GlobalFunctionsHelper|null $optionsManager
+     * @param GlobalFunctionsHelper|null $optionsManager
      * @param \Box\Spout\Common\Manager\OptionsManagerInterface|null $globalFunctionsHelper
      * @return ReaderInterface
      */
@@ -504,12 +504,12 @@ class ReaderTest extends TestCase
         $fieldDelimiter = ',',
         $fieldEnclosure = '"',
         $encoding = EncodingHelper::ENCODING_UTF8,
-        $shouldPreserveEmptyRows = false
+        $shouldPreserveEmptyRows = false,
     ) {
         $allRows = [];
         $resourcePath = $this->getResourcePath($fileName);
 
-        /** @var \Box\Spout\Reader\CSV\Reader $reader */
+        /** @var Reader $reader */
         $reader = $this->createCSVReader();
         $reader
             ->setFieldDelimiter($fieldDelimiter)
