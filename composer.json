@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3.0",
+        "php": ">=8.3",
         "ext-zip": "*",
         "ext-xmlreader": "*",
         "ext-dom": "*"
@@ -26,6 +26,9 @@
         "ext-iconv": "To handle non UTF-8 CSV files (if \"php-intl\" is not already installed or is too limited)",
         "ext-intl": "To handle non UTF-8 CSV files (if \"iconv\" is not already installed)"
     },
+    "replace": {
+        "box/spout": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "Box\\Spout\\": "src/Spout"
@@ -38,7 +41,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.3"
+            "php": "8.3"
         }
     }
 }
